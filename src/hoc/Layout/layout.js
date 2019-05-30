@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './layout.css'
+import Header from '../../components/Header/header'
 
 export default class layout extends Component {
     state = {
@@ -9,7 +10,7 @@ export default class layout extends Component {
         console.log(this.props)
         return (
             <div>
-                Header
+                <Header/>
                 {this.props.children}
                 Fotter
             </div>
