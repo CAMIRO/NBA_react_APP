@@ -4,13 +4,24 @@ import Header from '../../components/Header/header'
 
 export default class layout extends Component {
     state = {
-
+        showNav:false
     }
+
+    togglesidenav = (action) => {
+        this.setState({
+            showNav:action
+        })
+    }
+
     render() {
-        console.log(this.props)
+        //console.log(this.props)
         return (
             <div>
-                <Header/>
+                <Header
+                    showNav={this.state.showNav}
+                    onHideNav={() => this.togglesidenav(false)}
+                    onOpenNav={() => this.togglesidenav(true)}
+                />
                 {this.props.children}
                 Fotter
             </div>
