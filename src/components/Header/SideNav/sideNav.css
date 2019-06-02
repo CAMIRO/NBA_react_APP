@@ -1,8 +1,17 @@
 .option {
-    font-weight: 300;
-    font-size: 12px;
-    color: #bababa;
-    padding: 10px;
-    border-top: 1px solid #404040;
+  font-weight: 300;
+  font-size: 12px;
+  color: #bababa;
+  padding: 10px;
+  border-top: 1px solid #404040;
+}
+.option a {
+  color: inherit;
+  text-decoration: none;
+  color: #bababa;
 }
 
+.option a :first-child {
+  margin-right: 10px;
+  color: white;
+}
