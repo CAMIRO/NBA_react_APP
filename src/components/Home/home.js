@@ -1,5 +1,8 @@
 import React from "react";
+
+//COMPONENTS
 import NewsSlider from "../widgets/NewsSlider/slider";
+import NewsList from "../widgets/NewsList/newsList";
 
 export default function home() {
   return (
@@ -12,6 +15,7 @@ export default function home() {
           dots: false
         }}
       />
+      <NewsList type="card" loadmore={true} start={3} amount={3} />
     </div>
   );
 }

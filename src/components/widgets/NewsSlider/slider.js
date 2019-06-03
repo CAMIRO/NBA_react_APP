@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { URL } from "../../../config/config";
 
 ///// COMPONENTS
 import SliderTemplates from "./slider_templates";
@@ -9,12 +10,10 @@ export default class NewsSlider extends Component {
     news: []
   };
 
-  componentWillMount() {
+  componentDidMount() {
     axios
       .get(
-        `http://localhost:3004/articles?_start=${this.props.start}&_end=${
-          this.props.amount
-        }`
+        `${URL}/articles?_start=${this.props.start}&_end=${this.props.amount}`
       )
       .then(response => {
         //console.log(response.data);
