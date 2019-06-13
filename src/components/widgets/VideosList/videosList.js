@@ -3,6 +3,7 @@ import styles from "./videosList.css";
 import axios from "axios";
 import { URL } from "../../../config/config";
 import Button from "../Buttons/buttons";
+import VideosTemplate from "./videosTemplate";
 export default class videosList extends Component {
   state = {
     teams: [],
@@ -20,6 +21,40 @@ export default class videosList extends Component {
     ) : null;
   };
 
+  componentWillMount() {
+    this.request(this.state.start, this.state.end);
+  }
+
+  request = (start, end) => {
+    if (this.state.teams.length < 1) {
+      axios.get(`${URL}/teams`).then(response => {
+        this.setState({
+          teams: response.data
+        });
+      });
+    }
+    axios.get(`${URL}/videos?_start=${start}&_end=${end}`).then(response => {
+      this.setState({
+        videos: [...this.state.videos, ...response.data]
+      });
+    });
+  };
+
+  renderVideos = () => {
+    let template = null;
+
+    switch (this.props.type) {
+      case "card":
+        template = (
+          <VideosTemplate data={this.state.videos} teams={this.state.teams} />
+        );
+        break;
+      default:
+        template = null;
+    }
+    return template;
+  };
+
   loadMore = () => {
     return;
   };
@@ -35,9 +70,11 @@ export default class videosList extends Component {
     );
   };
   render() {
+    console.log(this.state.videos);
     return (
       <div className={styles.videoList_Wrapper}>
         {this.renderTitle()}
+        {this.renderVideos()}
         {this.renderButton()}
       </div>
     );
