@@ -69,6 +69,42 @@ class NewsList extends Component {
           </CSSTransition>
         ));
         break;
+      case "imgCard":
+        template = this.state.items.map((item, i) => (
+          <CSSTransition
+            classNames={{
+              enter: styles.newsList_wrapper,
+              enterActive: styles.newsList_wrapper_enter
+            }}
+            timeout={500}
+            key={i}
+          >
+            <div>
+              <Link to={`/articles/${item.id}`}>
+                <div className={styles.flex_wrapper}>
+                  <div
+                    className={styles.left}
+                    style={{
+                      background: `url('/images/articles/${item.image}')`
+                    }}
+                  >
+                    <div />
+                  </div>
+
+                  <div className={styles.right}>
+                    <CardInfo
+                      teams={this.state.teams}
+                      team={item.team}
+                      date={item.date}
+                    />
+                    <h2>{item.title}</h2>
+                  </div>
+                </div>
+              </Link>
+            </div>
+          </CSSTransition>
+        ));
+        break;
       default:
         template = null;
     }
@@ -76,6 +112,7 @@ class NewsList extends Component {
   };
   render() {
     //console.log("teams", this.state.teams);
+    ///console.log("rendering items in newslist", this.state.items);
     return (
       <div>
         <TransitionGroup component="div" className="list">
