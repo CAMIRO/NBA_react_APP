@@ -4,7 +4,7 @@ import React from "react";
 import NewsSlider from "../widgets/NewsSlider/slider";
 import NewsList from "../widgets/NewsList/newsList";
 
-export default function videos() {
+export default function news() {
   return (
     <div>
       <NewsSlider
