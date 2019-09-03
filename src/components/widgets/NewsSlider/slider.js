@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
-import { URL } from "../../../config/config";
+/// firebase
+import { firebaseArticles } from '../../../firebase';
+
 
 ///// COMPONENTS
 import SliderTemplates from "./slider_templates";
@@ -11,7 +12,20 @@ export default class NewsSlider extends Component {
   };
 
   componentDidMount() {
-    axios
+    firebaseArticles.limitToFirst(3).once('value')
+    .then((snapshot)=>{
+      const news = [];
+      snapshot.forEach((childSnapshot)=>{
+        news.push({
+          ...childSnapshot.val(),
+          id:childSnapshot.key
+        });
+        this.setState({
+          news
+        })
+      })
+    })
+   /*  axios
       .get(
         `${URL}/articles?_start=${this.props.start}&_end=${this.props.amount}`
       )
@@ -20,7 +34,7 @@ export default class NewsSlider extends Component {
         this.setState({
           news: response.data
         });
-      });
+      }); */
   }
 
   render() {
